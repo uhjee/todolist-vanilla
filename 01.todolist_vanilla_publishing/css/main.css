@@ -1,0 +1,122 @@
+/* COMMON */
+body {
+  background-color: #f2a154;
+  /* font 속성은 자손들에게 상속 */
+  color: #333;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.inner {
+  width: 1100px;
+  margin: 0 auto;
+  position: relative;
+}
+
+header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  background-color: #f7f6e7;
+  border-bottom: 1px solid #d8dcd1;
+  z-index: 9;
+  color: #656565;
+}
+
+header .inner {
+  display: flex;
+  height: 60px;
+  justify-content: space-between;
+  align-items: center;
+}
+header .inner .right {
+  display: flex;
+}
+header .inner .right .search {
+  height: 34px;
+  position: relative;
+  cursor: pointer;
+  margin-right: 15px;
+}
+
+header .inner .right .search input {
+  width: 100px;
+  height: 34px;
+  padding: 4px 10px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  /* focus 시 브라우저에 세팅된 파란 테두리 없애도록 */
+  outline: none;
+  /* cross-browsing : 흰색 명시적 선언 */
+  background-color: #fff;
+  border-radius: 5px;
+  color: #777;
+  font-size: 12px;
+  transition: 0.3s;
+}
+header .inner .right .search input:focus {
+  width: 170px;
+  border-color: #f27a54;
+}
+
+header .inner .right .search .material-icons {
+  height: 24px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 5px;
+  margin: auto 0;
+  transition: 0.2s;
+}
+header .inner .right .search.focused .material-icons {
+  opacity: 0;
+}
+
+header .inner .right .user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background-color: #f27a54;
+  width: 34px;
+  height: 34px;
+  border: 3px solid #d8dcd1;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+.todo-list {
+  position: fixed;
+  /* header height 만큼 아래부터  */
+  top: 60px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  margin: auto auto;
+  width: 770px;
+  height: 600px;
+  background-color: #e7e6e1;
+}
+.todo-list .header-bar {
+  display: flex;
+  padding: 10px;
+  background-color: #f7f6e7;
+}
+.todo-list .header-bar .box {
+  /* flex-container 의 크기 영향 x, 크기가 고정되어야 하는 flex item  축약형*/
+  /* default) flex: 0 1 auto; */
+  /* grow, shrink, flex-basis */
+  flex: none;
+  /* flex : 1; flex-container의 영향을 동등하게 나눠 받는다. */
+  /* flex: 1; */
+  margin-right: 15px;
+}
+.todo-list .header-bar .box--logo {
+}
+.todo-list .header-bar .box--date {
+}
+.todo-list .header-bar .material-icons {
+  margin-left: auto;
+}
