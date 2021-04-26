@@ -36,7 +36,6 @@ header .inner .right {
 header .inner .right .search {
   height: 34px;
   position: relative;
-  cursor: pointer;
   margin-right: 15px;
 }
 
@@ -54,6 +53,7 @@ header .inner .right .search input {
   color: #777;
   font-size: 12px;
   transition: 0.3s;
+  cursor: pointer;
 }
 header .inner .right .search input:focus {
   width: 170px;
@@ -86,7 +86,16 @@ header .inner .right .user {
   box-sizing: border-box;
 }
 
-.todo-list {
+header .inner .right .user:hover {
+  border: 3px solid #fff;
+  font-weight: 700;
+  font-size: 17px;
+  background-color: #e76942;
+  cursor: pointer;
+  /* color: #f27a54; */
+}
+
+.todo-container {
   position: fixed;
   /* header height 만큼 아래부터  */
   top: 60px;
@@ -99,12 +108,15 @@ header .inner .right .user {
   height: 600px;
   background-color: #e7e6e1;
 }
-.todo-list .header-bar {
+.todo-container .todo--header {
   display: flex;
-  padding: 10px;
+  height: 45px;
+  align-items: center;
+  /* padding: 10px; */
   background-color: #f7f6e7;
+  position: relative;
 }
-.todo-list .header-bar .box {
+.todo-container .todo--header .box {
   /* flex-container 의 크기 영향 x, 크기가 고정되어야 하는 flex item  축약형*/
   /* default) flex: 0 1 auto; */
   /* grow, shrink, flex-basis */
@@ -113,10 +125,24 @@ header .inner .right .user {
   /* flex: 1; */
   margin-right: 15px;
 }
-.todo-list .header-bar .box--logo {
+.todo-container .todo--header .box--logo {
+  width: 40px;
+  height: 100%;
+  position: relative;
 }
-.todo-list .header-bar .box--date {
+.todo-container .todo--header .box--logo .logo {
+  position: absolute;
+  width: 20px;
+  height: 35px;
+  top: 0;
+  background-color: #314e52;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
 }
-.todo-list .header-bar .material-icons {
-  margin-left: auto;
+
+.todo-container .todo--header .box--date {
+}
+.todo-container .todo--header .material-icons {
+  margin: 0 15px 0 auto;
 }
