@@ -62,9 +62,36 @@ a {
   transition: 0.13s;
 }
 
-.btn:hover {
-  font-size: 20px;
-  text-decoration: underline;
+.circle-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  color: #fff;
+  background-color: #f2a154;
+  cursor: pointer;
+  transition: 0.15s;
+}
+.circle-btn:hover {
+  transform: scale(1.2);
+  background-color: #fff;
+}
+.circle-btn--edit {
+  background-color: #536b48;
+}
+.circle-btn--edit:hover {
+  border: 3px solid #536b48;
+  color: #536b48;
+}
+.circle-btn--delete {
+  background-color: #f27a54;
+}
+.circle-btn--delete:hover {
+  border: 3px solid #f27a54;
+  color: #f27a54;
 }
 
 /* HEADER */
@@ -132,19 +159,19 @@ header .inner .right .user {
   justify-content: center;
   align-items: center;
   color: #fff;
-  background-color: #f27a54;
+  background-color: #314e52;
+  font-weight: 700;
   width: 34px;
   height: 34px;
-  border: 3px solid #d8dcd1;
   border-radius: 50%;
   box-sizing: border-box;
 }
 
 header .inner .right .user:hover {
-  border: 3px solid #fff;
-  font-weight: 700;
+  border: 3px solid #314e52;
   font-size: 17px;
-  background-color: #e76942;
+  background-color: #fff;
+  color: #314e52;
   cursor: pointer;
   /* color: #f27a54; */
 }
@@ -203,6 +230,8 @@ header .inner .right .user:hover {
 }
 
 .todo-container .todo--header .box--date {
+  flex: 1;
+  text-align: center;
   color: #909487;
   font-size: 18px;
 }
@@ -211,8 +240,11 @@ header .inner .right .user:hover {
 }
 
 .todo-container .todo--body {
+  max-height: calc(100% - 130px);
   padding: 20px 35px;
-  overflow: hidden;
+  box-sizing: border-box;
+  /* 스크롤이 있는 경우에만 표현 */
+  overflow-x: auto;
   background-color: #e7e6e1;
 }
 
@@ -222,14 +254,15 @@ header .inner .right .user:hover {
   height: 70px;
   margin-bottom: 20px;
   padding: 5px 10px;
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   border-radius: 3px;
   background-color: #d8dcd1;
-  transition: 0.15s;
+  transition: transform 0.15s;
 }
 
 .todo-container .todo--body__item:hover {
   transform: scale(1.05);
+  border: 3px solid #ffbc7d;
 }
 
 /* 홀수 요소 back-color 세팅 */
@@ -244,6 +277,7 @@ header .inner .right .user:hover {
 .todo-container .todo--body__item .mark {
   flex: none;
   margin-right: 20px;
+  cursor: pointer;
 }
 
 .todo-container .todo--body__item .content {
@@ -254,6 +288,15 @@ header .inner .right .user:hover {
   text-overflow: ellipsis;
   font-size: 18px;
   color: #62655a;
+}
+.todo-container .todo--body__item .btn-box {
+  display: flex;
+}
+.todo-container .todo--body__item .btn-box .circle-btn {
+  margin-left: 10px;
+}
+.todo-container .todo--body__item .btn-box .material-icons {
+  font-size: 16px;
 }
 
 .todo-container .todo--footer {
@@ -273,6 +316,14 @@ header .inner .right .user:hover {
   justify-content: center;
   align-items: center;
 }
+.todo-container .todo--footer .box--mark .mark {
+  transition: background-color 0.35s;
+  cursor: pointer;
+}
+.todo-container .todo--footer .box--mark .mark:hover {
+  background-color: #f27a54;
+  border: none;
+}
 .todo-container .todo--footer #input-todo {
   background-color: #f1f0e8;
   width: 100%;
@@ -282,9 +333,57 @@ header .inner .right .user:hover {
   outline: none;
   border: 1px solid #e7e6e1;
   border-radius: 4px;
+  color: #314e52;
   /* cursor: pointer; */
+  transition: 0.2s;
 }
-.todo-container .todo--footer #input-todo.focus {
+.todo-container .todo--footer #input-todo.focused {
   background-color: #fff;
   border: 3px solid #85b684;
+}
+
+.todo-container .todo--footer .btn {
+  position: relative;
+}
+.todo-container .todo--footer .btn:hover {
+  background: transparent;
+  transform: scale(1.2);
+}
+.todo-container .todo--footer .btn::before {
+  color: #f2a154;
+  content: '[';
+  display: block;
+  font-size: 1.5em;
+  top: 5px;
+  left: 30px;
+  opacity: 0;
+  position: absolute;
+  transition: all 300ms ease-in-out;
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: ease-in-out;
+  transition-delay: 0s;
+}
+.todo-container .todo--footer .btn::after {
+  color: #f2a154;
+  content: ']';
+  display: block;
+  font-size: 1.5em;
+  top: 5px;
+  right: 30px;
+  opacity: 0;
+  position: absolute;
+  transition: all 300ms ease-in-out;
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: ease-in-out;
+  transition-delay: 0s;
+}
+.todo-container .todo--footer .btn:hover::before {
+  left: 15px;
+  opacity: 1;
+}
+.todo-container .todo--footer .btn:hover::after {
+  right: 15px;
+  opacity: 1;
 }
