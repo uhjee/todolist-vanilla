@@ -8,12 +8,66 @@ body {
   line-height: 1.4;
 }
 
+p {
+  /* inline 요소 아래에 문자열 공간 갖는 것 삭제를 위함 */
+  display: block;
+}
+
+a {
+  text-decoration: none;
+}
+
 .inner {
   width: 1100px;
   margin: 0 auto;
   position: relative;
 }
 
+.mark {
+  width: 20px;
+  height: 33px;
+  margin: 0 5px;
+  box-sizing: border-box;
+}
+
+.mark--green {
+  background-color: #314e52;
+}
+
+.mark--lightgreen {
+  background-color: #85b684;
+}
+
+.mark--grey {
+  background-color: #a4a79d;
+}
+
+.mark--orange {
+  background-color: #f27a54;
+}
+
+.mark--blank {
+  border: 4px solid #909487;
+}
+
+.btn {
+  display: block;
+  width: 100px;
+  padding: 10px;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-weight: 700;
+  text-align: center;
+  color: #536b48;
+  transition: 0.13s;
+}
+
+.btn:hover {
+  font-size: 20px;
+  text-decoration: underline;
+}
+
+/* HEADER */
 header {
   width: 100%;
   position: fixed;
@@ -67,7 +121,7 @@ header .inner .right .search .material-icons {
   bottom: 0;
   right: 5px;
   margin: auto 0;
-  transition: 0.2s;
+  transition: 0.3s;
 }
 header .inner .right .search.focused .material-icons {
   opacity: 0;
@@ -95,7 +149,10 @@ header .inner .right .user:hover {
   /* color: #f27a54; */
 }
 
+/* TODO CARD */
 .todo-container {
+  display: flex;
+  flex-direction: column;
   position: fixed;
   /* header height 만큼 아래부터  */
   top: 60px;
@@ -106,14 +163,18 @@ header .inner .right .user:hover {
   margin: auto auto;
   width: 770px;
   height: 600px;
+  /* 자식 요소와 radius 를 묶을 방법이 있을 것 같다... 현재는 따로 따로 적용 */
+  border-radius: 10px;
   background-color: #e7e6e1;
+  box-shadow: 1px 1px rgba(0, 0, 0, 0.3);
 }
 .todo-container .todo--header {
   display: flex;
-  height: 45px;
+  height: 60px;
   align-items: center;
   /* padding: 10px; */
   background-color: #f7f6e7;
+  border-radius: 10px 10px 0 0;
   position: relative;
 }
 .todo-container .todo--header .box {
@@ -142,7 +203,88 @@ header .inner .right .user:hover {
 }
 
 .todo-container .todo--header .box--date {
+  color: #909487;
+  font-size: 18px;
 }
 .todo-container .todo--header .material-icons {
   margin: 0 15px 0 auto;
+}
+
+.todo-container .todo--body {
+  padding: 20px 35px;
+  overflow: hidden;
+  background-color: #e7e6e1;
+}
+
+.todo-container .todo--body__item {
+  display: flex;
+  align-items: center;
+  height: 70px;
+  margin-bottom: 20px;
+  padding: 5px 10px;
+  box-sizing: border-box;
+  border-radius: 3px;
+  background-color: #d8dcd1;
+  transition: 0.15s;
+}
+
+.todo-container .todo--body__item:hover {
+  transform: scale(1.05);
+}
+
+/* 홀수 요소 back-color 세팅 */
+.todo-container .todo--body__item:nth-child(2n-1) {
+  background-color: #d9e0ca;
+}
+
+.todo-container .todo--body__item:last-child {
+  margin-bottom: 0;
+}
+
+.todo-container .todo--body__item .mark {
+  flex: none;
+  margin-right: 20px;
+}
+
+.todo-container .todo--body__item .content {
+  /* 글자수 overflow  '...' 표현 */
+  max-width: calc(100% - 60px);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 18px;
+  color: #62655a;
+}
+
+.todo-container .todo--footer {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 70px;
+  border-radius: 0 0 10px 10px;
+  background-color: #f7f6e7;
+}
+
+.todo-container .todo--footer .box--mark {
+  width: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.todo-container .todo--footer #input-todo {
+  background-color: #f1f0e8;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: 18px;
+  outline: none;
+  border: 1px solid #e7e6e1;
+  border-radius: 4px;
+  /* cursor: pointer; */
+}
+.todo-container .todo--footer #input-todo.focus {
+  background-color: #fff;
+  border: 3px solid #85b684;
 }

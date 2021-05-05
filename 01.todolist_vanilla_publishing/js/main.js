@@ -244,3 +244,29 @@ searchInputEl.addEventListener('blur', () => {
   searchEl.classList.remove('focused');
   searchInputEl.removeAttribute('placeholder');
 });
+
+const thisYearEl = document.querySelector('.this-year');
+const today = new Date();
+function getDayString(day) {
+  switch (day) {
+    case 0:
+      return 'Sun';
+    case 1:
+      return 'Mon';
+    case 2:
+      return 'Tue';
+    case 3:
+      return 'Wen';
+    case 4:
+      return 'Thu';
+    case 5:
+      return 'Fri';
+    case 6:
+      return 'Sat';
+    default:
+      throw new Error('그런 요일은 없습니다.');
+  }
+}
+thisYearEl.textContent = `${today.getFullYear()}. ${today.getMonth() + 1}. ${today.getDate()} (${getDayString(
+  today.getDay(),
+)})`;
