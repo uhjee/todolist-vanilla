@@ -1,15 +1,25 @@
-# **Todolist app**
+[![Netlify Status](https://api.netlify.com/api/v1/badges/cdb6931f-dbbb-4989-91e2-2793aff8acdb/deploy-status)](https://app.netlify.com/sites/todolist-vanilla/deploys)
+
+# **📒Todolist-app**
 
 > HTML, CSS, Javascript 로 이것 저것 다 해보는 곳
 
 
 
-## **02.todolist_vanilla_npm_parcel**
+**[netlify로 연결해봤다](https://todolist-vanilla.netlify.app/) **(돈나가는 건 아니겠지? 믿는다 미국~!)
 
-- webpack, npm, package, build, barbel, compile, css pre-processor 등...  FE 생태계를 사용만 하지, 직접 세팅하고 공부할 생각을 못했다.
-- 이제 더는 ... vsCode live-server로 서버를 올리지 않아!
+
+
+## **00.todolist_vanilla**
+
+> `DOM api`
+
+- 누군가 사용했던 html, css을 빌려서 단순히 totolist app 로직을 위한 javascript 연습(출처를 찾아내자...)
+- DOM api 를 연습에 집중
 
 ## **01.todolist_vanilla_publishing**
+
+> `HTML`,` CSS`, `DOM api`
 
 - 0년차 개발자, 업무 진행 중 생각보다 많은 시간이 소요되는 곳은 css와  HTML이었다.
 
@@ -23,9 +33,11 @@
 
   (기존에 adobe inllustrator와 photoshop을 다룰 줄 알았기 때문에, 생각보다는 재밌었다. 생각보다는...)
 
-  
+## **>> 02.todolist_vanilla_npm_parcel**
 
-## **00.todolist_vanilla**
+> `npm`, `netlify`
 
-- 누군가 사용했던 html, css을 빌려서 단순히 totolist app 로직을 위한 javascript 연습(출처를 찾아내자...)
-- DOM api 를 연습에 집중
+- webpack, npm, package, build, barbel, compile, css pre-processor 등...  FE 생태계를 사용만 하지, 직접 세팅하고 공부할 생각을 못했다.
+- 이제 더는 ... vsCode live-server로 서버를 올리지 않아! 
+- 구경꾼들을 위해 ... 보는 사람도 없겠지만, 사실 지하철에서 괜히 폰으로 켜서 자기만족을 하기 위해 **netlify**로 배포해보았다. 나만 보겠지... 오히려 안심.
+- 
