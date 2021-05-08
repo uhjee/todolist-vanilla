@@ -464,20 +464,20 @@ var todoList = {
     // }
 
     // 01. Fragment 사용 element 구성
-    // live dom 외부에 메모리상 dom 생성(fragment)
-    const docFrag = document.createDocumentFragment();
-    // 그릇, 매개체 역할만 하는 빈 div element
-    const divEl = document.createElement('div');
+    // // live dom 외부에 메모리상 dom 생성(fragment)
+    // const docFrag = document.createDocumentFragment();
+    // // 그릇, 매개체 역할만 하는 빈 div element
+    // const divEl = document.createElement('div');
 
-    docFrag.appendChild(divEl);
-    docFrag.querySelector('div').innerHTML =
-      //
-      `<li class="todo--body__item">
-    <div class="mark mark--${markColor}"></div>
-    <div class="content">${inputEl.value}</div></li>`;
+    // docFrag.appendChild(divEl);
+    // docFrag.querySelector('div').innerHTML =
+    //   //
+    //   `<li class="todo--body__item">
+    // <div class="mark mark--${markColor}"></div>
+    // <div class="content">${inputEl.value}</div></li>`;
 
     const todoBodyEl = document.querySelector('.todo--body');
-    todoBodyEl.appendChild(docFrag.querySelector('div').firstChild);
+    todoBodyEl.appendChild(components.makeTodoItem(inputEl.value, markColor));
 
     //  input 초기화
     inputEl.value = '';
@@ -664,7 +664,7 @@ var doneList = {
 };
 // 추가 버튼 이벤트 등록
 document.querySelector('#add-btn').addEventListener('click', todoList.addTodo);
-// // document.querySelector("input.text-basic").addEventListener('keyup', todoList.addList);
+//  document.querySelector("input.text-basic").addEventListener('keyup', todoList.addList);
 // // 모두 완료 버튼 이벤트 등록
 // document.getElementById('btnDelAll').addEventListener('click', todoList.delAllEle);
 // // 마지막 엘레먼트 완료 버튼 이벤트 등록
@@ -738,26 +738,44 @@ thisYearEl.textContent = `${today.getFullYear()}. ${today.getMonth() + 1}. ${tod
 )})`;
 
 // fragmentDocument와  innerHtml 를 이용해 컴포넌트를 찍어내는 객체
-// TODO@heojeehaeng : class로 변경, factory pattern으로 변경
+// TODO@heojeehaeng : class로 변경, factory pattern?으로 변경
 const components = (() => {
+  function makeTodoItem(text, markColor = 'orange') {
+    // live dom 외부에 메모리상 dom 생성(fragment)
+    const docFrag = document.createDocumentFragment();
+    // 그릇, 매개체 역할만 하는 빈 div element
+    const divEl = document.createElement('div');
+
+    docFrag.appendChild(divEl);
+    docFrag.querySelector('div').innerHTML = `
+      <li class="todo--body__item">
+          <div class="mark mark--${markColor}"></div>
+          <div class="content">${text}</div>
+      </li>`;
+
+    return docFrag.cloneNode(true).querySelector('div').firstElementChild;
+    // const todoBodyEl = document.querySelector('.todo--body');
+  }
+
   function makeBtnBoxForTodoItem() {
     const docFrag = document.createDocumentFragment();
     const divEl = document.createElement('div');
     docFrag.appendChild(divEl);
     docFrag.querySelector('div').innerHTML = `
-    <div class="btn-box">
-      <a href="javascript:void(0)" class="circle-btn circle-btn--edit">
-        <div class="material-icons">edit</div>
-      </a>
-      <a href="javascript:void(0)" class="circle-btn circle-btn--delete">
-        <div class="material-icons">clear</div>
-      </a>
-    </div>`;
+      <div class="btn-box">
+        <a href="javascript:void(0)" class="circle-btn circle-btn--edit">
+          <div class="material-icons">edit</div>
+        </a>
+        <a href="javascript:void(0)" class="circle-btn circle-btn--delete">
+          <div class="material-icons">clear</div>
+        </a>
+      </div>`;
 
     return docFrag.cloneNode(true).querySelector('div').firstElementChild;
   }
 
   return {
+    makeTodoItem,
     btnBoxForTodoItem: makeBtnBoxForTodoItem(),
   };
 })();

@@ -4,11 +4,25 @@
 
 > HTML, CSS, Javascript 로 이것 저것 다 해보는 곳
 
+**[netlify로 연결해봤다](https://todolist-vanilla.netlify.app/)**(돈나가는 건 아니겠지? 믿는다 미국~!)
 
+### 욕심 나열
 
-**[netlify로 연결해봤다](https://todolist-vanilla.netlify.app/) **(돈나가는 건 아니겠지? 믿는다 미국~!)
-
-
+- [ ] todolist 단순 로직
+- [ ] event loop 이해
+- [ ] webpack, babel-loader
+- [ ] SCSS
+- [ ] validation check
+- [ ] drag & drop
+- [ ] functional 강의 들은 거 적용해서 util성 library 비스무리한거 만들어보기
+- [ ] server 구현
+- [ ] 반응형, grid system
+- [ ] vue
+- [ ] progress bar
+- [ ] login 기능
+- [ ] react
+- [ ] typescript
+- [x] npm 적용
 
 ## **00.todolist_vanilla**
 
@@ -21,7 +35,7 @@
 
 > `HTML`,` CSS`, `DOM api`
 
-- 0년차 개발자, 업무 진행 중 생각보다 많은 시간이 소요되는 곳은 css와  HTML이었다.
+- 0년차 개발자, 업무 진행 중 생각보다 많은 시간이 소요되는 곳은 css와 HTML이었다.
 
   (왜 padding 살짝만 바꿔도 전체 구조가 깨지는 걸까?)
 
@@ -37,7 +51,7 @@
 
 > `npm`, `netlify`
 
-- webpack, npm, package, build, barbel, compile, css pre-processor 등...  FE 생태계를 사용만 하지, 직접 세팅하고 공부할 생각을 못했다.
-- 이제 더는 ... vsCode live-server로 서버를 올리지 않아! 
+- webpack, npm, package, build, barbel, compile, css pre-processor 등... FE 생태계를 사용만 하지, 직접 세팅하고 공부할 생각을 못했다.
+- 이제 더는 ... vsCode live-server로 서버를 올리지 않아!
 - 구경꾼들을 위해 ... 보는 사람도 없겠지만, 사실 지하철에서 괜히 폰으로 켜서 자기만족을 하기 위해 **netlify**로 배포해보았다. 나만 보겠지... 오히려 안심.
-- 
+-

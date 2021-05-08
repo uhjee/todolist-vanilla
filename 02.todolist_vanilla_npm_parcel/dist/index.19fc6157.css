@@ -66,8 +66,8 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 35px;
-  height: 35px;
+  width: 27px;
+  height: 27px;
   border-radius: 50%;
   box-sizing: border-box;
   color: #fff;
@@ -254,7 +254,7 @@ header .inner .right .user:hover {
   height: 70px;
   margin-bottom: 20px;
   padding: 5px 10px;
-  /* box-sizing: border-box; */
+  box-sizing: border-box;
   border-radius: 3px;
   background-color: #d8dcd1;
   transition: transform 0.15s;
@@ -262,7 +262,8 @@ header .inner .right .user:hover {
 
 .todo-container .todo--body__item:hover {
   transform: scale(1.05);
-  border: 3px solid #ffbc7d;
+  border-left: 12px solid #fff;
+  border-right: 12px solid #fff;
 }
 
 /* 홀수 요소 back-color 세팅 */
@@ -293,7 +294,7 @@ header .inner .right .user:hover {
   display: flex;
 }
 .todo-container .todo--body__item .btn-box .circle-btn {
-  margin-left: 10px;
+  margin-left: 7px;
 }
 .todo-container .todo--body__item .btn-box .material-icons {
   font-size: 16px;
