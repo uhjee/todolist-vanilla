@@ -69,10 +69,21 @@
 
       <div class="todo--footer">
         <div class="box--mark">
-          <div class="mark mark--blank"></div>
+          <div class="select-color-btn">
+            <div class="mark mark--lightgreen"></div>
+          </div>
         </div>
         <input type="text" id="input-todo" placeholder="해야할 일을 입력해주세요." />
         <a href="javascript:void(0)" class="btn" id="add-btn">Add</a>
+      </div>
+
+      <!-- SELECT-BTN -->
+      <div class="select-color-box">
+        <div class="material-icons selectable close" data-action="close">close</div>
+        <div class="mark selectable mark--green" data-action="select" data-color="green"></div>
+        <div class="mark selectable mark--lightgreen" data-action="select" data-color="lightgreen"></div>
+        <div class="mark selectable mark--orange" data-action="select" data-color="orange"></div>
+        <div class="mark selectable mark--grey" data-action="select" data-color="grey"></div>
       </div>
     </section>
   </body>

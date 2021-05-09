@@ -444,43 +444,115 @@ id) /*: string*/
 },{}],"SXDIM":[function(require,module,exports) {
 'use script';
 
-var todoList = {
-  addTodo(e) {
+/**
+ *  TODO@heojeehaeng : class로 변경, factory pattern?으로 변경
+ * ! Components fragmentDocument와  innerHtml 를 이용해 컴포넌트를 만드는 함수를 반환한다.
+ * @return  {[type]}  make[componentName] 네이밍을 가진 컴포넌트 만드는 함수를
+ */
+const components = (() => {
+  /**
+   * todo-item component 를 반환한다.
+   *
+   * @param   {[type]}  text       todo 텍스트 콘텐츠
+   * @param   {[type]}  markColor  green, lightGreen, grey, *orange(default)
+   * @author  uhjee
+   * @return  {[type]}             todo-item component
+   */
+  function makeTodoItem(text, markColor = 'orange') {
+    const docFrag = document.createDocumentFragment();
+    // 그릇, 매개체 역할만 하는 빈 div element
+    const divEl = document.createElement('div');
+
+    docFrag.appendChild(divEl);
+    docFrag.querySelector('div').innerHTML = `
+      <li class="todo--body__item">
+          <div class="mark mark--${markColor}"></div>
+          <div class="content">${text}</div>
+      </li>`;
+    // why cloneNode? Fragment element는 append 되면 메모리에서 사라짐.
+    return docFrag.cloneNode(true).querySelector('div').firstElementChild;
+  }
+
+  /**
+   * btn-box component (edit, delete btn) 를 반환한다.
+   * @author  uhjee
+   * @return  {[type]}  btn-box component (edit, delete btn)
+   */
+  function makeBtnBoxForTodoItem() {
+    const docFrag = document.createDocumentFragment();
+    const divEl = document.createElement('div');
+    docFrag.appendChild(divEl);
+    docFrag.querySelector('div').innerHTML = `
+      <div class="btn-box">
+        <a href="javascript:void(0)" class="circle-btn circle-btn--edit">
+          <div class="material-icons">edit</div>
+        </a>
+        <a href="javascript:void(0)" class="circle-btn circle-btn--delete">
+          <div class="material-icons">clear</div>
+        </a>
+      </div>`;
+
+    return docFrag.cloneNode(true).querySelector('div').firstElementChild;
+  }
+
+  return {
+    makeTodoItem,
+    makeBtnBoxForTodoItem,
+  };
+})();
+
+// TODO@heojeehaeng - data & UI 를 분리하자.....
+const data = function () {
+  const todoList = [];
+  return {
+    getTodoListData,
+    addTodoItemData,
+  };
+};
+
+// ! 로직 관련 (이벤트 핸들러)----------------------------------------------------------
+const todoList = {
+  /**
+   * todo--body에 todo-item을 추가한다.
+   *
+   * @return  {[type]}     [return description]
+   */
+  addTodo: () => {
     const inputEl = document.querySelector('#input-todo');
     if (!inputEl.value || inputEl.value.replaceAll(' ', '').length < 1) {
       // TODO@heojeehaeng ui로 표현하기
       alert('내용을 입력해주세요.');
       inputEl.value = '';
       inputEl.focus();
-      return false;
+      return;
     }
 
-    const todoText = inputEl.value;
     // TODO@heojeehaeng 색 동적으로 받아오기(green, grey, lightgreen, orange)
-    const markColor = 'orange';
-
-    // if (e.keyCode != 13) {
-    //     return;
-    // }
-
-    // 01. Fragment 사용 element 구성
-    // // live dom 외부에 메모리상 dom 생성(fragment)
-    // const docFrag = document.createDocumentFragment();
-    // // 그릇, 매개체 역할만 하는 빈 div element
-    // const divEl = document.createElement('div');
-
-    // docFrag.appendChild(divEl);
-    // docFrag.querySelector('div').innerHTML =
-    //   //
-    //   `<li class="todo--body__item">
-    // <div class="mark mark--${markColor}"></div>
-    // <div class="content">${inputEl.value}</div></li>`;
+    const markColor = 'green';
 
     const todoBodyEl = document.querySelector('.todo--body');
     todoBodyEl.appendChild(components.makeTodoItem(inputEl.value, markColor));
 
     //  input 초기화
     inputEl.value = '';
+  },
+  showItemBtnBox: (e) => {
+    // event delegate Container & 추가될 자기 자신 제외
+    if ([...e.target.classList].includes('todo--body') || e.target.closest('.btn-box')) return; // 구조분해할당을 통한 likeArray => Array
+    const itemEl = e.target.closest('.todo--body__item');
+
+    // 유효성 체크
+    if (!itemEl || [...itemEl.classList].includes('focused')) return;
+    if (!todoBodyEl.contains(itemEl)) return;
+
+    itemEl.addEventListener('mouseleave', () => {
+      if (itemEl.querySelector('.btn-box')) {
+        itemEl.classList.remove('focused');
+        itemEl.querySelector('.btn-box').remove();
+      }
+    });
+    itemEl.classList.add('focused'); // flag 역할
+    itemEl.appendChild(components.makeBtnBoxForTodoItem());
   },
   delAllEle: function () {
     var list = document.getElementById('listBody');
@@ -568,6 +640,33 @@ var todoList = {
         // checkbox의 부모의 부모 == tr El를 삭제해준다.
         body.removeChild(chkbox[i].parentNode.parentNode);
       }
+    }
+  },
+  /**
+   * 요일(num)에 따른 약어 요일(String)을 반환한다.
+   * @author  uhjee
+   * @param   {[type]}  day  숫자형 day(Date.getDay() 반환값)
+   *
+   * @return  {[type]}       약어 요일(String) e.g. Sun
+   */
+  getDayString: (day) => {
+    switch (day) {
+      case 0:
+        return 'Sun';
+      case 1:
+        return 'Mon';
+      case 2:
+        return 'Tue';
+      case 3:
+        return 'Wen';
+      case 4:
+        return 'Thu';
+      case 5:
+        return 'Fri';
+      case 6:
+        return 'Sat';
+      default:
+        throw new Error('Not exist the day!');
     }
   },
 };
@@ -701,7 +800,7 @@ searchInputEl.addEventListener('blur', () => {
 });
 
 //  ! TODO CARD 관련 이벤트.
-// inputTodo 관련
+// * input-todo 관련
 const inputTodoEl = document.querySelector('#input-todo');
 inputTodoEl.addEventListener('focus', () => {
   inputTodoEl.classList.add('focused');
@@ -713,91 +812,34 @@ inputTodoEl.addEventListener('blur', () => {
 // 날짜 표현(오늘)
 const thisYearEl = document.querySelector('.this-year');
 const today = new Date();
-function getDayString(day) {
-  switch (day) {
-    case 0:
-      return 'Sun';
-    case 1:
-      return 'Mon';
-    case 2:
-      return 'Tue';
-    case 3:
-      return 'Wen';
-    case 4:
-      return 'Thu';
-    case 5:
-      return 'Fri';
-    case 6:
-      return 'Sat';
-    default:
-      throw new Error('Not exist the day!');
-  }
-}
-thisYearEl.textContent = `${today.getFullYear()}. ${today.getMonth() + 1}. ${today.getDate()} (${getDayString(
+
+thisYearEl.textContent = `${today.getFullYear()}. ${today.getMonth() + 1}. ${today.getDate()} (${todoList.getDayString(
   today.getDay(),
 )})`;
 
-// fragmentDocument와  innerHtml 를 이용해 컴포넌트를 찍어내는 객체
-// TODO@heojeehaeng : class로 변경, factory pattern?으로 변경
-const components = (() => {
-  function makeTodoItem(text, markColor = 'orange') {
-    // live dom 외부에 메모리상 dom 생성(fragment)
-    const docFrag = document.createDocumentFragment();
-    // 그릇, 매개체 역할만 하는 빈 div element
-    const divEl = document.createElement('div');
-
-    docFrag.appendChild(divEl);
-    docFrag.querySelector('div').innerHTML = `
-      <li class="todo--body__item">
-          <div class="mark mark--${markColor}"></div>
-          <div class="content">${text}</div>
-      </li>`;
-
-    return docFrag.cloneNode(true).querySelector('div').firstElementChild;
-    // const todoBodyEl = document.querySelector('.todo--body');
-  }
-
-  function makeBtnBoxForTodoItem() {
-    const docFrag = document.createDocumentFragment();
-    const divEl = document.createElement('div');
-    docFrag.appendChild(divEl);
-    docFrag.querySelector('div').innerHTML = `
-      <div class="btn-box">
-        <a href="javascript:void(0)" class="circle-btn circle-btn--edit">
-          <div class="material-icons">edit</div>
-        </a>
-        <a href="javascript:void(0)" class="circle-btn circle-btn--delete">
-          <div class="material-icons">clear</div>
-        </a>
-      </div>`;
-
-    return docFrag.cloneNode(true).querySelector('div').firstElementChild;
-  }
-
-  return {
-    makeTodoItem,
-    btnBoxForTodoItem: makeBtnBoxForTodoItem(),
-  };
-})();
-
-// list, mouseover, button group
-// Event delegate 를 사용한 Event pattern
+// * todo--item: mouseover, button group -- Event delegattion
 // TODO@heojeehaeng throttle 하게 적용해도 될 듯.. 알아보자
-document.querySelector('.todo--body').addEventListener('mouseover', (e) => {
-  const targetClassList = [...e.target.classList];
-  // event delegate Container & 추가될 자기 자신 제외
-  if (targetClassList.includes('todo--body') || e.target.closest('.btn-box')) {
-    return false;
+const todoBodyEl = document.querySelector('.todo--body');
+todoBodyEl.addEventListener('mouseover', todoList.showItemBtnBox);
+
+// * select-color-box 관련
+const selectColorBtnEl = document.querySelector('.select-color-btn');
+const selectColorBox = document.querySelector('.select-color-box');
+selectColorBtnEl.addEventListener('click', () => {
+  selectColorBox.classList.add('show');
+});
+
+selectColorBox.addEventListener('click', (e) => {
+  // if(e.target.dataset
+  // TODO@heojeehaeng ::isEmpty로 변경
+  if (![...e.target.classList].includes('selectable')) return;
+  console.log(e.target.dataset.action);
+  if (e.target.dataset.action === 'close') {
+    selectColorBox.classList.remove('show');
+    return;
   }
-  const itemEl = e.target.closest('.todo--body__item');
-  // Element.closest() => 자기 자신 포함해서 searching. 따라서 아래 코드 필요 X
-  // const itemEl = targetClassList.includes('todo--body__item') ? e.target : e.target.closest('.todo--body__item');
-  itemEl.addEventListener('mouseleave', () => {
-    if (itemEl.querySelector('.btn-box')) {
-      itemEl.querySelector('.btn-box').remove();
-    }
-  });
-  itemEl.appendChild(components.btnBoxForTodoItem);
+
+  // console.log(!!e.target.dataset);
 });
 
 },{}]},["3AS1F","SXDIM"], "SXDIM", "parcelRequire6e5b")
