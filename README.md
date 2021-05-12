@@ -1,4 +1,4 @@
-brㅠ[![Netlify Status](https://api.netlify.com/api/v1/badges/cdb6931f-dbbb-4989-91e2-2793aff8acdb/deploy-status)](https://app.netlify.com/sites/todolist-vanilla/deploys)
+bbrㅠ[![Netlify Status](https://api.netlify.com/api/v1/badges/cdb6931f-dbbb-4989-91e2-2793aff8acdb/deploy-status)](https://app.netlify.com/sites/todolist-vanilla/deploys)
 
 # **📒Todolist-app**
 
@@ -75,3 +75,36 @@ brㅠ[![Netlify Status](https://api.netlify.com/api/v1/badges/cdb6931f-dbbb-4989
   CSS class 로만 element들에게 의미를 부여했던 과거와 달리, 이걸 알아버린 나는 좀 더 편하게 element들을 다룰 수 있겠다고 생각에 가슴이 설레었다.
 
 - CSS에 `:root{}` 등으로 **변수 처리**를 할 수 있다는 사실에 충격. 삶의 질이 높아졌다.
+
+- javascript의 코드를 역할에 따라 분리해야겠다는 생각을 드디어 실천으로 옮겨보았다.  
+  </br>
+  <img src="./02.todolist_vanilla_npm_parcel/src/images/modules.jpg" alt="modules" >
+
+  1. **components**
+
+     - element들을 찍어내는 역할.
+     - DOM API, Fragment와 ES6 문자열 리터럴를 사용해 element를 만든다.
+     - 데이터는 전적으로 datas에 의존한다.(단방향)
+     - 왠지 노출시키면 안될 것 같은 느낌이 들어서, 클로저로 필요한 부분만 노출
+
+  2. **datas**
+
+     - UI에 필요한, 그리고 추후 서버에도 보낼 때 필요한 데이터를 담당하는 곳
+     - handler에 의해서만 변한다. (같은 data에 의해서도 변한다.)
+     - zerocho said, 데이터가 변하면, 화면이 변한다.
+     - 왠지 노출시키면 안될 것 같은 느낌이 들어서, 클로저로 필요한 부분만 노출
+
+  3. **handlers**
+     - 우리가 아는 그 핸들러
+     - 따로 모아 관리하는 것이 편한 것 같아서 분리
+  4. **eventListener**
+     - 우리가 아는 그 리스너
+     - 전역 말고 어디 멋진 곳에 모셔둘 수 없을까!
+     - 고민 중
+  5. **util**
+
+     - 중역은 아니지만, 모이면 힘이되는 유틸리티성 함수 친구들!
+     - 추후 유인동 선생님께 배운 함수형 프로그래밍을 적용해볼 수 있겠다. 마치 lodash 워!
+
+- 각 module들의 역할과 돌아가는 꼴
+  <img src="./02.todolist_vanilla_npm_parcel/src/images/module_cycle.jpg" alt="modules" >

@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
     <link rel="stylesheet" href="./src/css/main.css" />
-    <script defer src="./src/js/main.js"></script>
+    <script type="module" src="./src/js/main.js"></script>
   </head>
   <body>
     <!-- HEADER -->
@@ -45,9 +45,18 @@
       </div>
 
       <ul class="todo--body">
-        <li class="todo--body__item">
+        <li class="todo--body__item editing">
           <div class="mark mark--orange"></div>
-          <div class="content">리팩토링 책 제발 읽어보자..</div>
+          <input class="input-editing" type="text" />
+          <!-- <div class="content">리팩토링 책 제발 읽어보자..</div> -->
+          <div class="btn-box btn-box--editing">
+            <a href="javascript:void(0)" class="circle-btn circle-btn--check" data-action="check">
+              <div class="material-icons">done</div>
+            </a>
+            <a href="javascript:void(0)" class="circle-btn circle-btn--cancel" data-action="cancel">
+              <div class="material-icons">clear</div>
+            </a>
+          </div>
         </li>
         <li class="todo--body__item">
           <div class="mark mark--lightgreen"></div>
