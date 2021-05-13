@@ -4,6 +4,7 @@
 
 # 프로젝트 전체 중 node_modules라는 디렉토리 명을 사용하는 하위 파일들은 관리대상에서 제외
 node_modules/
-
 dist/
 .parcel-cache/
+.cache/
+.DS_Store

@@ -1,7 +1,7 @@
 import _datas from './components/datas.js';
 import _components from './components/components.js';
 import _handlers from './components/handlers.js';
-import _utils from './components/utils.js';
+import { getDateWithDayString } from './components/utils.js';
 
 // var doneList = {
 //   delAllEle: function () {
@@ -151,45 +151,16 @@ inputTodoEl.addEventListener('blur', _handlers.removeClass(inputTodoEl, 'focused
 
 // 날짜 표현(오늘)
 const thisYearEl = document.querySelector('.this-year');
-const today = new Date();
 
-thisYearEl.textContent = `${today.getFullYear()}. ${today.getMonth() + 1}. ${today.getDate()} (${_utils.getDayString(
-  today.getDay(),
-)})`;
+thisYearEl.textContent = getDateWithDayString();
 
 // * todo--item: mouseover, btn-box : Event delegattion
 // TODO@heojeehaeng throttle 하게 적용해도 될 듯.. 알아보자
 const todoBodyEl = document.querySelector('.todo--body');
-todoBodyEl.addEventListener('mouseover', _handlers.showItemBtnBox);
+todoBodyEl.addEventListener('mouseover', (e) => _handlers.showItemBtnBox(e, todoBodyEl));
 
 // * click, btn-box
-todoBodyEl.addEventListener('click', (e) => {
-  const circleBtn = e.target.closest('.circle-btn');
-  if (circleBtn) {
-    const action = circleBtn.dataset.action;
-    const todoItem = e.target.closest('.todo--body > .todo--body__item');
-    switch (action) {
-      case 'edit':
-        // TODO@uhjee ::edit
-        return;
-      case 'delete':
-        // TODO@uhjee ::UI로 바꾸기 (validation과 함꼐)
-        if (confirm('지우시겠어요?')) {
-          console.log(todoItem);
-          todoItem.remove();
-          // TODO@uhjee ::모든 요소 삭제시, body background에 글씨 "할일을 적어보세여"
-        }
-        return;
-      case 'check':
-        console.log(todoItem);
-        return;
-      case 'cancel':
-        return;
-      default:
-        throw new Error('check  attribute of element dataset.action');
-    }
-  }
-});
+todoBodyEl.addEventListener('click', _handlers.doBtnBoxAction);
 
 // * select-color-box 관련
 const selectColorBtnEl = document.querySelector('.select-color-btn');

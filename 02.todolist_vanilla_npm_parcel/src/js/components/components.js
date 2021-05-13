@@ -64,9 +64,42 @@ export default (() => {
     <div class="mark mark--${_datas.getSelectedMarkColor()}"></div>
     `;
 
+  /**
+   * 수정 중인 todoItem component 를 반환한다.
+   *
+   * @param   {[type]}  content    [content 수전 전의 item text]
+   * @param   {[type]}  markColor  [markColor 수정 전의 mark color]
+   *
+   * @return  {[type]}             [return editingTodoItem]
+   */
+  const makeEditingTodoItem = (content, markColor) => {
+    const docFrag = document.createDocumentFragment();
+    const divEl = document.createElement('div');
+    docFrag.appendChild(divEl);
+    docFrag.querySelector('div').innerHTML = `
+      <div class="btn-box btn-box--editing">
+        <div class="mark mark--${markColor}"></div>
+        <input class="input-editing" type="text" />
+        <div class="btn-box btn-box--editing">
+          <a href="javascript:void(0)" class="circle-btn circle-btn--check" data-action="check">
+            <div class="material-icons">done</div>
+          </a>
+          <a href="javascript:void(0)" class="circle-btn circle-btn--cancel" data-action="cancel">
+            <div class="material-icons">clear</div>
+          </a>
+        </div>
+      </div>
+    `;
+    const inputEl = docFrag.querySelector('input.input-editing');
+    inputEl.textContent = content;
+    // console.log(divEl);
+    return docFrag.cloneNode(true).querySelector('div').firstElementChild;
+  };
+
   return {
     makeTodoItem: (text) => makeTodoItem(text),
     makeBtnBoxForTodoItem: () => makeBtnBoxForTodoItem(),
     makeMark: () => makeMark(),
+    makeEditingTodoItem: (content, markColor) => makeEditingTodoItem(content, markColor),
   };
 })();

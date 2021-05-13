@@ -2,7 +2,7 @@ import _components from './components.js';
 import _datas from './datas.js';
 
 // ! 로직 관련 (이벤트 핸들러)----------------------------------------------------------
-export default {
+const _handlers = {
   /**
    * todo--body에 todo-item을 추가한다.
    *
@@ -24,6 +24,14 @@ export default {
     //  input 초기화
     inputEl.value = '';
   },
+  /**
+   * mouseOver 이벤트 핸들러, 수정, 삭제 버튼을 item 내에 표현한다.
+   *
+   * @param   {[type]}  e         [e description]
+   * @param   {[type]}  parentEl  [parentEl description]
+   *
+   * @return  {[type]}            [return description]
+   */
   showItemBtnBox: (e, parentEl) => {
     // event delegate Container & 추가될 자기 자신 제외
     if (
@@ -36,7 +44,7 @@ export default {
 
     // 유효성 체크
     if (!itemEl || [...itemEl.classList].includes('focused')) return;
-    // if (!todoBodyEl.contains(itemEl)) return;
+    if (!parentEl.contains(itemEl)) return;
 
     itemEl.addEventListener('mouseleave', () => {
       if (itemEl.querySelector('.btn-box')) {
@@ -48,6 +56,13 @@ export default {
     itemEl.appendChild(_components.makeBtnBoxForTodoItem());
   },
 
+  /**
+   * todo-footer의 mark 색상을 선택한다.
+   *
+   * @param   {[type]}  e  [e description]
+   *
+   * @return  {[type]}     [return description]
+   */
   selectColorMark: (e) => {
     // TODO@heojeehaeng ::isEmpty로 변경
     if (![...e.target.classList].includes('selectable')) return;
@@ -65,11 +80,59 @@ export default {
     selectColorBox.classList.remove('show');
     return;
   },
-  addClass: (element, className) => () => {
-    element.classList.add(className);
+  doBtnBoxAction: (e) => {
+    const circleBtn = e.target.closest('.circle-btn');
+    if (circleBtn) {
+      const action = circleBtn.dataset.action;
+      let todoItemEl = e.target.closest('.todo--body > .todo--body__item');
+      switch (action) {
+        case 'edit':
+          // TODO@uhjee ::edit
+          _handlers.addClass(todoItemEl, 'editing');
+          // btn-box 삭제
+          if (todoItemEl.querySelector('.btn-box')) {
+            todoItemEl.classList.remove('focused');
+            todoItemEl.querySelector('.btn-box').remove();
+          }
+          // constent 옮겨 담기
+          const content = todoItemEl.querySelector('.content').innerText;
+          // mark color 옮겨 담기
+          const markColorClass = [...todoItemEl.querySelector('.mark').classList].find((i) => i.indexOf('--') > 0);
+          const markColor = markColorClass.split('--')[1];
+
+          // item children 모두 삭제, 잔인..
+          todoItemEl.querySelectorAll('*').forEach((child) => child.remove());
+
+          console.log(_components.makeEditingTodoItem(content, markColor));
+          const edtingTodoItemEl = _components.makeEditingTodoItem(content, markColor);
+          console.log(edtingTodoItemEl.children);
+          [...edtingTodoItemEl.children].forEach((child) => todoItemEl.appendChild(child));
+
+          return;
+        case 'delete':
+          // TODO@uhjee ::UI로 바꾸기 (validation과 함꼐)
+          if (confirm('지우시겠어요?')) {
+            console.log(todoItemEl);
+            todoItemEl.remove();
+            // TODO@uhjee ::모든 요소 삭제시, body background에 글씨 "할일을 적어보세여"
+          }
+          return;
+        case 'check':
+          console.log(todoItemEl);
+          return;
+        case 'cancel':
+          return;
+        default:
+          throw new Error('check  attribute of element dataset.action');
+      }
+    }
   },
-  removeClass: (element, className) => () => {
-    element.classList.remove(className);
+
+  addClass: (element, className) => {
+    element?.classList.add(className);
+  },
+  removeClass: (element, className) => {
+    element?.classList.remove(className);
   },
   delAllEle: function () {
     var list = document.getElementById('listBody');
@@ -160,3 +223,5 @@ export default {
     }
   },
 };
+
+export default _handlers;
