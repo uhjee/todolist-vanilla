@@ -120,3 +120,4 @@ bbrㅠ[![Netlify Status](https://api.netlify.com/api/v1/badges/cdb6931f-dbbb-498
 - CDN 으로 쓰던 lib, package로 전환(css reset, meterial-icon)
 - 너무 아쉽지만 여기서 todolist-vanilla 잠시 중단. typescript 공부 시작
 - git commit message 여러줄 입력 테스트...
+  - option + enter 가 동작한다... 지금까지 해온 더러운 commit message.. 잊자
