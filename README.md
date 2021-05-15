@@ -119,3 +119,4 @@ bbrㅠ[![Netlify Status](https://api.netlify.com/api/v1/badges/cdb6931f-dbbb-498
 - [2021.05.15] 'done' 기능 제외하고, 기본 기능 완성. (사실 done이 제일 메인 기능이긴 하지만...)
 - CDN 으로 쓰던 lib, package로 전환(css reset, meterial-icon)
 - 너무 아쉽지만 여기서 todolist-vanilla 잠시 중단. typescript 공부 시작
+- git commit message 여러줄 입력 테스트...
