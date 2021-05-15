@@ -10,6 +10,7 @@ bbrㅠ[![Netlify Status](https://api.netlify.com/api/v1/badges/cdb6931f-dbbb-498
 ### **욕심 나열**
 
 - [ ] todolist 단순 로직
+- [ ] localStorage을 DB삼아 API 요청 유사하게 만들어 보기
 - [ ] event loop 이해
 - [ ] webpack, babel-loader
 - [ ] SCSS
@@ -95,12 +96,16 @@ bbrㅠ[![Netlify Status](https://api.netlify.com/api/v1/badges/cdb6931f-dbbb-498
      - 왠지 노출시키면 안될 것 같은 느낌이 들어서, 클로저로 필요한 부분만 노출
 
   3. **handlers**
+
      - 우리가 아는 그 핸들러
      - 따로 모아 관리하는 것이 편한 것 같아서 분리
+
   4. **eventListener**
+
      - 우리가 아는 그 리스너
      - 전역 말고 어디 멋진 곳에 모셔둘 수 없을까!
      - 고민 중
+
   5. **util**
 
      - 중역은 아니지만, 모이면 힘이되는 유틸리티성 함수 친구들!
@@ -108,3 +113,9 @@ bbrㅠ[![Netlify Status](https://api.netlify.com/api/v1/badges/cdb6931f-dbbb-498
 
 - 각 module들의 역할과 돌아가는 꼴
   <img src="./02.todolist_vanilla_npm_parcel/src/images/module_cycle.jpg" alt="modules" >
+
+- 수정 버튼 클릭 시, textContent를 input.value로 가져가야 했는데, `Node.replaceChild(newChild, oldChild)` 을 몰라서, element를 교체하는데 애를 먹었다.
+
+- [2021.05.15] 'done' 기능 제외하고, 기본 기능 완성. (사실 done이 제일 메인 기능이긴 하지만...)
+- CDN 으로 쓰던 lib, package로 전환(css reset, meterial-icon)
+- 너무 아쉽지만 여기서 todolist-vanilla 잠시 중단. typescript 공부 시작
