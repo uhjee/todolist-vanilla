@@ -2,7 +2,7 @@
   "name": "02.todolist_vanilla_npm_parcel",
   "version": "1.0.0",
   "description": "",
-  "main": "bundled/main.html",
+  "main": "bundled/index.html",
   "scripts": {
     "dev": "parcel index.html",
     "build": "parcel build index.html"
