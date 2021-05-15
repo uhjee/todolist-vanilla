@@ -79,7 +79,7 @@ bbrㅠ[![Netlify Status](https://api.netlify.com/api/v1/badges/cdb6931f-dbbb-498
 
 - javascript의 코드를 역할에 따라 분리해야겠다는 생각을 드디어 실천으로 옮겨보았다.  
   </br>
-  <img src="./02.todolist_vanilla_npm_parcel/src/images/modules.jpg" alt="modules" >
+  <img src="./images/modules.jpg" alt="modules" >
 
   1. **components**
 
@@ -112,7 +112,7 @@ bbrㅠ[![Netlify Status](https://api.netlify.com/api/v1/badges/cdb6931f-dbbb-498
      - 추후 유인동 선생님께 배운 함수형 프로그래밍을 적용해볼 수 있겠다. 마치 lodash 워!
 
 - 각 module들의 역할과 돌아가는 꼴
-  <img src="./02.todolist_vanilla_npm_parcel/src/images/module_cycle.jpg" alt="modules" >
+  <img src="./images/module_cycle.jpg" alt="modules" >
 
 - 수정 버튼 클릭 시, textContent를 input.value로 가져가야 했는데, `Node.replaceChild(newChild, oldChild)` 을 몰라서, element를 교체하는데 애를 먹었다.
 
