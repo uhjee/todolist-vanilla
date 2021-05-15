@@ -163,7 +163,7 @@ todoBodyEl.addEventListener('mouseover', (e) => _handlers.showItemBtnBox(e, todo
 todoBodyEl.addEventListener('click', _handlers.doBtnBoxAction);
 
 // * select-color-box 관련
-const selectColorBtnEl = document.querySelector('.select-color-btn');
+const selectColorBtnEl = document.querySelector('.todo--footer .select-color-btn');
 const selectColorBox = document.querySelector('.select-color-box');
 selectColorBtnEl.addEventListener('click', () => {
   selectColorBox.classList.add('show');

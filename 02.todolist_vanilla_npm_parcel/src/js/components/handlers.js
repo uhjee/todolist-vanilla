@@ -1,6 +1,9 @@
 import _components from './components.js';
 import _datas from './datas.js';
 
+// TODO@uhjee ::임시.. edit 진입 시, 원본 데이터 카피..개선해야함
+let originContent = '';
+
 // ! 로직 관련 (이벤트 핸들러)----------------------------------------------------------
 const _handlers = {
   /**
@@ -66,18 +69,18 @@ const _handlers = {
   selectColorMark: (e) => {
     // TODO@heojeehaeng ::isEmpty로 변경
     if (![...e.target.classList].includes('selectable')) return;
-    const selectableBtn = e.target;
-    // close 버튼
-    if (selectableBtn.dataset.action === 'close') {
-      selectColorBox.classList.remove('show');
-      return;
+    const selectableBtnEl = e.target;
+    const selectColorBoxEl = selectableBtnEl.closest('.select-color-box');
+    const selectColorBtnEl = document.querySelector('.todo--footer .select-color-btn');
+
+    // color 선택
+    if (selectableBtnEl.dataset.action !== 'close') {
+      _datas.setSelectedMarkColor(selectableBtnEl.dataset.color);
+      selectColorBtnEl.innerHTML = _components.makeMark();
     }
 
-    _datas.setSelectedMarkColor(selectableBtn.dataset.color);
-
-    selectColorBtnEl.innerHTML = _components.makeMark();
-    // TODO@uhjee :: DATA BINDING!!!!
-    selectColorBox.classList.remove('show');
+    // close 버튼
+    selectColorBoxEl.classList.remove('show');
     return;
   },
   doBtnBoxAction: (e) => {
@@ -94,20 +97,18 @@ const _handlers = {
             todoItemEl.classList.remove('focused');
             todoItemEl.querySelector('.btn-box').remove();
           }
-          // constent 옮겨 담기
+          // content, mark color 가져오기
           const content = todoItemEl.querySelector('.content').innerText;
-          // mark color 옮겨 담기
           const markColorClass = [...todoItemEl.querySelector('.mark').classList].find((i) => i.indexOf('--') > 0);
           const markColor = markColorClass.split('--')[1];
 
-          // item children 모두 삭제, 잔인..
-          todoItemEl.querySelectorAll('*').forEach((child) => child.remove());
+          // 원본 content 저장
+          originContent = content;
 
-          console.log(_components.makeEditingTodoItem(content, markColor));
           const edtingTodoItemEl = _components.makeEditingTodoItem(content, markColor);
-          console.log(edtingTodoItemEl.children);
-          [...edtingTodoItemEl.children].forEach((child) => todoItemEl.appendChild(child));
-
+          const parentEl = todoItemEl.parentNode;
+          // * Node.replaceChild(newChild, oldChild)  --좋아..
+          parentEl.replaceChild(edtingTodoItemEl, todoItemEl);
           return;
         case 'delete':
           // TODO@uhjee ::UI로 바꾸기 (validation과 함꼐)
@@ -118,9 +119,19 @@ const _handlers = {
           }
           return;
         case 'check':
-          console.log(todoItemEl);
+          const editedContent = todoItemEl.querySelector('input.input-editing').value;
+          const editedTodoItemEl = _components.makeTodoItem(editedContent);
+          todoItemEl.parentNode.replaceChild(editedTodoItemEl, todoItemEl);
+
+          // 원본 데이터 메모리 초기화
+          originContent = '';
           return;
         case 'cancel':
+          const originTodoItemEl = _components.makeTodoItem(originContent);
+          // * 사실, content가 아닌 el 자체를 보관해도 될 것 같다.
+          todoItemEl.parentNode.replaceChild(originTodoItemEl, todoItemEl);
+
+          originContent = '';
           return;
         default:
           throw new Error('check  attribute of element dataset.action');

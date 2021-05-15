@@ -77,7 +77,7 @@ export default (() => {
     const divEl = document.createElement('div');
     docFrag.appendChild(divEl);
     docFrag.querySelector('div').innerHTML = `
-      <div class="btn-box btn-box--editing">
+      <li class="todo--body__item editing">
         <div class="mark mark--${markColor}"></div>
         <input class="input-editing" type="text" />
         <div class="btn-box btn-box--editing">
@@ -88,11 +88,10 @@ export default (() => {
             <div class="material-icons">clear</div>
           </a>
         </div>
-      </div>
+      </li>
     `;
     const inputEl = docFrag.querySelector('input.input-editing');
-    inputEl.textContent = content;
-    // console.log(divEl);
+    inputEl.value = content;
     return docFrag.cloneNode(true).querySelector('div').firstElementChild;
   };
 

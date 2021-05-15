@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>todolist-vanilla</title>
 
-    <!-- CDN: css reset  -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
-    <!-- CDN: google_material-icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <!-- modern-normalize PACKAGE :: css reset -->
+    <link rel="stylesheet" href="./node_modules/modern-normalize/modern-normalize.css" />
+
+    <!-- material-icons PACKAGE -->
+    <link rel="stylesheet" href="./node_modules/material-icons/iconfont/material-icons.css" />
 
     <link rel="stylesheet" href="./src/css/main.css" />
     <script type="module" src="./src/js/main.js"></script>
@@ -45,18 +46,9 @@
       </div>
 
       <ul class="todo--body">
-        <li class="todo--body__item editing">
+        <li class="todo--body__item">
           <div class="mark mark--orange"></div>
-          <input class="input-editing" type="text" />
-          <!-- <div class="content">리팩토링 책 제발 읽어보자..</div> -->
-          <div class="btn-box btn-box--editing">
-            <a href="javascript:void(0)" class="circle-btn circle-btn--check" data-action="check">
-              <div class="material-icons">done</div>
-            </a>
-            <a href="javascript:void(0)" class="circle-btn circle-btn--cancel" data-action="cancel">
-              <div class="material-icons">clear</div>
-            </a>
-          </div>
+          <div class="content">아프지 말기</div>
         </li>
         <li class="todo--body__item">
           <div class="mark mark--lightgreen"></div>
@@ -68,11 +60,7 @@
         </li>
         <li class="todo--body__item">
           <div class="mark mark--grey"></div>
-          <div class="content">
-            리팩토링 책 제발 읽어보자..리팩토링 책 제발 읽어보자..리팩토링 책 제발 읽어보자..리팩토링 책 제발리팩토링 책
-            제발 읽어보자..리팩토링 책 제발 읽어보자..리팩토링 책 제발 읽어보자..리팩토링 책 제발 읽어보자..리팩토링 책
-            제발 읽어보자..리팩토링 책 제발 읽어보자.. 읽어보자..리팩토링 책 제발 읽어보자..리팩토링 책 제발 읽어보자..
-          </div>
+          <div class="content">긍정적으로 생각하기</div>
         </li>
       </ul>
 
