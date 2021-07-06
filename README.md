@@ -5,13 +5,13 @@ bbrㅠ[![Netlify Status](https://api.netlify.com/api/v1/badges/cdb6931f-dbbb-498
 > HTML, CSS, Javascript 로 이것 저것 다 해보는 곳 🧪
 > Back to the basic!
 
-**[netlify로 연결해봤다](https://todolist-vanilla.netlify.app/)**(돈나가는 건 아니겠지? 믿는다 미국~!)
+**[netlify](https://todolist-vanilla.netlify.app/)**
 
-### **욕심 나열**
+## Goals
 
 - [ ] todolist 단순 로직
 - [ ] localStorage을 DB삼아 API 요청 유사하게 만들어 보기
-- [ ] event loop 이해
+- [x] event loop 이해
 - [ ] webpack, babel-loader
 - [ ] SCSS
 - [ ] validation check
@@ -22,7 +22,7 @@ bbrㅠ[![Netlify Status](https://api.netlify.com/api/v1/badges/cdb6931f-dbbb-498
 - [ ] progress bar
 - [ ] functional 강의 들은 거 적용해서 util성 library 비스무리한거 만들어보기
 - [ ] sign in, sign up
-- [ ] theme (라섹남 나를 위한 dark 모드)
+- [ ] theme
 - [ ] react
 - [ ] typescript
 - [ ] AWS
